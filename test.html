@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Backend Test</title>
+</head>
+<body>
+  <h2>Test Gemini Backend</h2>
+  <input id="msg" type="text" placeholder="Ask me anything">
+  <button onclick="send()">Send</button>
+  <pre id="output"></pre>
+
+  <script>
+    async function send() {
+      const message = document.getElementById("msg").value;
+      const res = await fetch("http://localhost:5000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      });
+      const data = await res.json();
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
