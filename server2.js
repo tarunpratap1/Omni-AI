@@ -20,16 +20,35 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 
 // Chat endpoint
+// ---------------- Chat Route ----------------
 app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
-    if (!message) return res.status(400).json({ reply: "No message provided." });
 
+    if (!message || !message.trim()) {
+      return res.status(400).json({ reply: "⚠️ No message provided." });
+    }
+
+    console.log("💬 User asked:", message);
+
+    // Call Gemini
     const result = await model.generateContent(message);
-    res.json({ reply: result.response.text() });
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    res.status(500).json({ reply: "⚠️ Error connecting to OmniAI API" });
+
+    // Defensive check
+    const reply =
+      result?.response?.text?.() || "⚠️ AI did not return any response.";
+
+    console.log("🤖 AI replied:", reply.slice(0, 100), "...");
+
+    res.json({ reply });
+
+  } catch (err) {
+    console.error("❌ Chat error:", err);
+
+    // Always return a response instead of crashing
+    res.status(500).json({
+      reply: "⚠️ AI request failed. Please try again in a moment."
+    });
   }
 });
 
@@ -291,3 +310,4 @@ app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PO
 // const PORT = process.env.PORT || 5000;
 
 // app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PORT}`));
+
