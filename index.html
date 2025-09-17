@@ -2438,7 +2438,20 @@
                 // ... your existing init code ...
                 setupPDFFunctionality(); // Add this line
             }
+
+            // connect with render
+
+            // Instead of localhost
+const API_BASE = "https://omni-ai.onrender.com";  
+
+const res = await fetch(`${API_BASE}/api/chat`, { 
+  method: "POST", 
+  headers: { "Content-Type": "application/json" }, 
+  body: JSON.stringify({ message: userMessage }) 
+});
+
         </script>
 </body>
+
 
 </html>
