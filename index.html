@@ -2444,15 +2444,25 @@
             // Instead of localhost
 const API_BASE = "https://omni-ai-35gk.onrender.com";  
 
-const res = await fetch(`${API_BASE}/api/chat`, { 
-  method: "POST", 
-  headers: { "Content-Type": "application/json" }, 
-  body: JSON.stringify({ message: userMessage }) 
-});
+async function getAIResponse(userMessage) {
+  try {
+    const res = await fetch(`${API_BASE}/api/chat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userMessage })
+    });
+    const data = await res.json();
+    return data.reply;
+  } catch (err) {
+    console.error(err);
+    return "⚠️ Unable to connect to AI server.";
+  }
+}
 
         </script>
 </body>
 
 
 </html>
+
 
