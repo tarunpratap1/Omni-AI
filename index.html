@@ -2107,10 +2107,12 @@
                     chatItem.className = `chat-item ${chat.id === currentChatId ? 'active' : ''}`;
                     chatItem.dataset.chatId = chat.id;
 
-                    chatItem.innerHTML = `
+                         chatItem.innerHTML = `
                     <i class="fas fa-message"></i>
                     <div class="chat-item-content">${chat.title}</div>
-                    <button class="delete-chat"><i class="fas fa-trash"></i></button>
+                    <div class="delete-chat" data-chat-id="${chat.id}">
+                        <i class="fas fa-trash"></i>
+                    </div>
                 `;
 
                     chatItem.addEventListener('click', () => loadChat(chat.id));
@@ -2464,5 +2466,6 @@ async function getAIResponse(userMessage) {
 
 
 </html>
+
 
 
