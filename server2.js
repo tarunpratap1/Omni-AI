@@ -2,12 +2,14 @@ import express from "express";
 import cors from "cors";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-app.use(cors({ origin: "*" })); // allow all origins
+ // allow all origins
 
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(cors({ origin: "*" }));
 
 // ⚠️ Insert your Gemini API key here
 const GEMINI_API_KEY = "AIzaSyBX2hdnxfXKAKL-MiA6-posegt2_hBQbwA";
@@ -309,6 +311,7 @@ app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PO
 // const PORT = process.env.PORT || 5000;
 
 // app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PORT}`));
+
 
 
 
