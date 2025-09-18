@@ -16,7 +16,7 @@ const GEMINI_API_KEY = "AIzaSyBX2hdnxfXKAKL-MiA6-posegt2_hBQbwA";
 
 // Initialize Gemini model
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
 
 
@@ -311,6 +311,7 @@ app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PO
 // const PORT = process.env.PORT || 5000;
 
 // app.listen(PORT, () => console.log(`✅ Backend running at http://localhost:${PORT}`));
+
 
 
 
